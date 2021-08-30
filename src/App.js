@@ -8,6 +8,7 @@ import Signup from './Components/SignUpForm.js';
 import Header from './Components/Header.js';
 import Home from './Components/Home.js'
 import AboutUs from './Components/AboutUs.js';
+import User from './Components/User.js';
 
 class App extends Component {
   state = { 
@@ -26,31 +27,52 @@ class App extends Component {
                   <Signin
                   setToken={this.setToken}
                   {...routerProps}/>
-                )}></Route>
+                )}>
+        </Route>
         <Route path="/signup" 
                 render={(routerProps) => (
                   <Signup
                   setToken={this.setToken}
                   {...routerProps}/>
-                )}></Route>
+                )}>
+        </Route>
+        <Route path='/user'>
+                  render={(routerProps) => (
+                    this.state.token ?
+                    <User
+                      token={this.state.token}
+                      {...routerProps}
+                    /> 
+                    : <Redirect to='/' />
+                  )}
+        </Route>
         <Route path="/addpurchaseitem" 
                 render={(routerProps) => (
+                  this.state.token ?
                   <AddPurchaseItem
                   token={this.state.token}
                   {...routerProps}/>
-                )}></Route>
+                  : <Redirect to='/' />
+                )}>
+        </Route>
         <Route path="/addrecurringpurchaseitem" 
                 render={(routerProps) => (
+                  this.state.token ?
                   <AddRecurringPurchaseItem
                   token={this.state.token}
                   {...routerProps}/>
-                )}></Route>
+                  : <Redirect to='/' />
+                )}>
+        </Route>
         <Route path="/modifyrecurringpurchaseitem" 
                 render={(routerProps) => (
+                  this.state.token ?
                   <ModifyRecurringPurchaseItem
                   token={this.state.token}
                   {...routerProps}/>
-                )}></Route>
+                  : <Redirect to='/' />
+                )}>
+        </Route>
         <Route path="/aboutus"
           render={(routerProps) => (
             <AboutUs
@@ -62,7 +84,8 @@ class App extends Component {
           <Home
           token={this.state.token}
           {...routerProps}/>
-        )}></Route>
+        )}>  
+        </Route>
       </Switch>
     </BrowserRouter>
      );
