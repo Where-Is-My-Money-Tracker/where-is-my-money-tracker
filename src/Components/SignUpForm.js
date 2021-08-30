@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getToken } from './fetch-utils.js';
+import { getToken } from '../fetch-utils.js';
 
 class Signup extends Component {
     state = { email: '', password: '' };
@@ -21,7 +21,7 @@ class Signup extends Component {
     render() { 
         return (
             <>
-                <h1>Signup</h1>
+                <h1>Sign-up</h1>
                 <form onSubmit={this.handleSubmit}>
                     <div className='form-control'>
                         <label>Email: </label>
@@ -41,7 +41,7 @@ class Signup extends Component {
                             }}
                         />
                     </div>
-                    <button>{ this.targetType() }</button>
+                    <button>Sign-up</button>
                 </form>
             </>
         );
