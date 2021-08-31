@@ -27,7 +27,6 @@ export async function getPurchases(){
 }
 
 //TODO
-//postPurchases
 //postRecurring
 //postCategories
 
@@ -59,3 +58,17 @@ export async function getCategories(){
     return result
 }
 
+//postPurchases
+export async function postPurchase(purchaseObject){
+    const dataURL = `${URL}/api/purchases`
+    const response = await fetch(dataURL, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': localStorage.getItem('TOKEN')
+        },
+        body: JSON.stringify(purchaseObject)
+    });
+    const result = await response.json();
+    return result
+}
