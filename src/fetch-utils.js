@@ -23,6 +23,25 @@ export async function getPurchases(){
         }
     })
     const result = await response.json();
-    console.log(result)
+    return result
+}
+
+//TODO
+//getRecurring
+//getCategories
+//postPurchases
+//postRecurring
+//postCategories
+
+export async function getRecurring(){
+    const data = `${URL}/api/recurring`
+    const response = await fetch(data, {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': localStorage.getItem('TOKEN')
+        }
+    })
+    const result = await response.json();
     return result
 }
