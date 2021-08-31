@@ -113,3 +113,20 @@ export async function putRecurring(recurringObject){
     const result = await response.json();
     return result
 }
+
+//deletePurchase
+export async function deletePurchase(purchaseObject){
+    const dataURL = `${URL}/api/purchases/${purchaseObject.id}`
+    const response = await fetch(dataURL, {
+        method: 'DELETE',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': localStorage.getItem('TOKEN')
+        },
+        // body: JSON.stringify(purchaseObject)
+    });
+    const result = await response.json();
+    return result
+}
+
+//deleteRecurring
