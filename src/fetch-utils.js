@@ -1,4 +1,4 @@
-const URL = 'https://stark-hamlet-56268.herokuapp.com';
+const URL = 'https://immense-plateau-42063.herokuapp.com';
 
 export async function getToken(loginInfo, type) {
     const authURL = `${URL}/auth/${type}`;
@@ -23,5 +23,6 @@ export async function getPurchases(){
         }
     })
     const result = await response.json();
+    console.log(result)
     return result
 }

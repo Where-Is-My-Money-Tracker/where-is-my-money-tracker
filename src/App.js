@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
 // import AddPurchaseItem from './Components/AddPurchaseItemForm.js';
 // import AddRecurringPurchaseItem from './Components/AddRecurringPurchaseItem.js';
 // import ModifyRecurringPurchaseItem from './Components/ModifyRecurringPurchaseItem.js';
@@ -8,7 +8,6 @@ import Signup from './Components/SignUpForm.js';
 import Header from './Components/Header.js';
 import Home from './Components/Home.js';
 import AboutUs from './Components/AboutUs.js';
-import User from './Components/User.js';
 
 class App extends Component {
   state = { 
