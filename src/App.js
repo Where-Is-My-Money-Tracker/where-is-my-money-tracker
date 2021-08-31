@@ -1,21 +1,20 @@
 import React, { Component } from 'react';
-import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-import AddPurchaseItem from './Components/AddPurchaseItemForm.js';
-import AddRecurringPurchaseItem from './Components/AddRecurringPurchaseItem.js';
-import ModifyRecurringPurchaseItem from './Components/ModifyRecurringPurchaseItem.js';
+import { BrowserRouter, Switch, Route } from 'react-router-dom';
+// import AddPurchaseItem from './Components/AddPurchaseItemForm.js';
+// import AddRecurringPurchaseItem from './Components/AddRecurringPurchaseItem.js';
+// import ModifyRecurringPurchaseItem from './Components/ModifyRecurringPurchaseItem.js';
 import Signin from './Components/SignInForm.js';
 import Signup from './Components/SignUpForm.js';
 import Header from './Components/Header.js';
-import Home from './Components/Home.js'
+import Home from './Components/Home.js';
 import AboutUs from './Components/AboutUs.js';
-import User from './Components/User.js';
 
 class App extends Component {
   state = { 
     token: localStorage.getItem('TOKEN'),
    }
    setToken = (value) => {
-     this.setState({token: (value)})
+     this.setState({token: value})
    }
   render() { 
     return ( 
@@ -36,17 +35,7 @@ class App extends Component {
                   {...routerProps}/>
                 )}>
         </Route>
-        <Route path='/user'>
-                  render={(routerProps) => (
-                    this.state.token ?
-                    <User
-                      token={this.state.token}
-                      {...routerProps}
-                    /> 
-                    : <Redirect to='/' />
-                  )}
-        </Route>
-        <Route path="/addpurchaseitem" 
+        {/* <Route path="/addpurchaseitem" 
                 render={(routerProps) => (
                   this.state.token ?
                   <AddPurchaseItem
@@ -72,7 +61,7 @@ class App extends Component {
                   {...routerProps}/>
                   : <Redirect to='/' />
                 )}>
-        </Route>
+        </Route> */}
         <Route path="/aboutus"
           render={(routerProps) => (
             <AboutUs
@@ -83,6 +72,7 @@ class App extends Component {
         render={(routerProps) => (
           <Home
           token={this.state.token}
+          setToken={this.setToken}
           {...routerProps}/>
         )}>  
         </Route>

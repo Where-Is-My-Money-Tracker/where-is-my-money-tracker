@@ -14,11 +14,10 @@ class Signin extends Component {
             }, 'signin'
         );
         this.props.setToken(token);
-
-        this.props.history.push('/user');
     };
 
     render() { 
+        console.log(this.props.setToken)
         return (
             <>
                 <h1>Sign-in</h1>

@@ -1,10 +1,7 @@
-const URL = 'https://stark-hamlet-56268.herokuapp.com';
+const URL = 'https://immense-plateau-42063.herokuapp.com';
 
 export async function getToken(loginInfo, type) {
-
     const authURL = `${URL}/auth/${type}`;
-
-    // POST to /signin or /signup
     const resp = await fetch(authURL, {
         method: 'POST',
         headers: {
@@ -12,13 +9,20 @@ export async function getToken(loginInfo, type) {
         },
         body: JSON.stringify(loginInfo),
     });
-
     const data = await resp.json();
-    console.log(data);
-
-    // set the token to local storage
     localStorage.setItem('TOKEN', data.token);
-
-    // return the userid
     return data.token;
+}
+export async function getPurchases(){
+    const data = `${URL}/api/purchases`
+    const response = await fetch(data, {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': localStorage.getItem('TOKEN')
+        }
+    })
+    const result = await response.json();
+    console.log(result)
+    return result
 }
