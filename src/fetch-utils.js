@@ -23,6 +23,39 @@ export async function getPurchases(){
         }
     })
     const result = await response.json();
-    console.log(result)
     return result
 }
+
+//TODO
+//postPurchases
+//postRecurring
+//postCategories
+
+//getRecurring
+export async function getRecurring(){
+    const data = `${URL}/api/recurring`
+    const response = await fetch(data, {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': localStorage.getItem('TOKEN')
+        }
+    })
+    const result = await response.json();
+    return result
+}
+
+//getCategories
+export async function getCategories(){
+    const data = `${URL}/api/categories`
+    const response = await fetch(data, {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': localStorage.getItem('TOKEN')
+        }
+    })
+    const result = await response.json();
+    return result
+}
+
