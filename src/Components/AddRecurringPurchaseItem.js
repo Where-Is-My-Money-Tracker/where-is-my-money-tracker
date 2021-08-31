@@ -6,6 +6,7 @@ class AddRecurringPurchaseItem extends Component {
     state = {
         parentCategory: 0,
         childCategories: [],
+        optionSelector: 'add new category',
         cost: '',
         description: '',
         frequency: 0,
@@ -23,10 +24,14 @@ handleChange = async (event, key) => {
 }
 
 handleCategoryChange = async (event) => {
+    this.setState({ optionSelector: event.target.value })
+    if (event.target.value !== 'add new category') {
+        this.setState({ parentCategory: event.target.value });
+    }
     const categories = await getCategories();
-    const childCategories = categories.filter(item => item.parent_id === event.target.value);
-    this.setState({ childCategories: childCategories, parentCategory: event.target.value });
-
+    const childCategories = categories.filter(item => item.parent_id === Number(event.target.value));
+    this.setState({ childCategories });
+    console.log(this.state);
 }
 
 handleSubmit = async (event) => {
@@ -39,21 +44,31 @@ handleSubmit = async (event) => {
             <>
                 <h1>Add Recurring Purchase Item Form</h1>
                 <form>
-                    {/* <Dropdown>
-                        handleChange={this.handleChangeCategory}
-                        value={this.state.parentCategory}
-                        label='category'
-                        options={this.state.childCategories}
-                    </Dropdown> */}
-                    <select>
-                        value={this.state.parentCategory}
+                    <p>Item description</p>
+                    <input type='text' onChange={(e) => this.handleChange(e, 'description')} />
+                    <p>Item cost</p>
+                    <input type='number' onChange={(e) => this.handleChange(e, 'cost')} />
+                    <p>Frequency (days)</p>
+                    <input type='number' onChange={(e) => this.handleChange(e, 'frequency')}/>
+                    <br></br>
+                    <select 
+                        onChange={(e) => this.handleCategoryChange(e)}
+                        value={this.state.optionSelector}
+                    >
                         {this.state.childCategories.map( (cat) => (
                             <option
                                 key={cat.id}
                                 value={cat.id}
                             >{cat.description}</option>
                         ))};
+                        <option value='add new category'>Add a category</option>
                     </select>
+                    {this.state.optionSelector === 'add new category' 
+                            ? <input type="text"
+                                onChange={(e)=> this.handleChange(e, 'newCategoryInput')}
+                              ></input> 
+                            : <p></p>} 
+
                 </form>
             </>
         );
