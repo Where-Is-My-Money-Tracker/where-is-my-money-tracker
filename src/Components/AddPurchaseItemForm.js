@@ -3,31 +3,30 @@ import { getCategories } from '../fetch-utils.js';
 
 class AddPurchaseItem extends Component {
     state = { 
+        parentCategory:0,
+        childCategories:[],
+        categorySelect:0,
+        cost:'',
         description:'', 
-        cost:0,
-        category_id:0,
         timestamp:0,
-        newCategory:'',
-        childCategories:[]
+        newCategoryInput:'',
      }
      componentDidMount= async() => {
         const categories = await getCategories()  
+        const childCategories = categories.filter(item => item.parent_id === this.state.parentCategory)
         console.log(categories);
-        this.setState({
-            childCategories: categories.description,
-            
-        })
+        this.setState({childCategories})
      }
 
-     handlePurchase = async(e) => {
-         e.preventDefault()
-         const newPurchase = {
-             description: this.state.description,
-             cost: this.state.cost,
-             category: this.state.category,
-             timestamp: Date.now() 
-         }
-     }
+    //  handlePurchase = async(e) => {
+    //      e.preventDefault()
+    //      const newPurchase = {
+    //          description: this.state.description,
+    //          cost: this.state.cost,
+    //          category: this.state.category,
+    //          timestamp: Date.now() 
+    //      }
+    //  }
 
     render() { 
         return ( 
@@ -44,7 +43,9 @@ class AddPurchaseItem extends Component {
                         required></input>
                     <p>Category</p>
                     <select>
-                        <option></option>
+                        {this.state.childCategories.map(item => (
+                            <option key={item.id} value={item.id}>{item.description}</option>
+                        ))}
                     </select>
                     <button>Submit purchase item</button>
                 </form>
