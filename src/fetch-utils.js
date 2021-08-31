@@ -26,10 +26,6 @@ export async function getPurchases(){
     return result
 }
 
-//TODO
-//postRecurring
-//postCategories
-
 //getRecurring
 export async function getRecurring(){
     const data = `${URL}/api/recurring`
@@ -68,6 +64,36 @@ export async function postPurchase(purchaseObject){
             'Authorization': localStorage.getItem('TOKEN')
         },
         body: JSON.stringify(purchaseObject)
+    });
+    const result = await response.json();
+    return result
+}
+
+//postRecurring
+export async function postRecurring(recurringObject){
+    const dataURL = `${URL}/api/recurring`
+    const response = await fetch(dataURL, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': localStorage.getItem('TOKEN')
+        },
+        body: JSON.stringify(recurringObject)
+    });
+    const result = await response.json();
+    return result
+}
+
+//postCategories
+export async function postCategories(categoryObject){
+    const dataURL = `${URL}/api/categories`
+    const response = await fetch(dataURL, {
+        method: 'POST',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': localStorage.getItem('TOKEN')
+        },
+        body: JSON.stringify(categoryObject)
     });
     const result = await response.json();
     return result
