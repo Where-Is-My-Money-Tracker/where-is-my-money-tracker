@@ -98,3 +98,18 @@ export async function postCategories(categoryObject){
     const result = await response.json();
     return result
 }
+
+//putRecurring
+export async function putRecurring(recurringObject){
+    const dataURL = `${URL}/api/recurring/${recurringObject.id}`
+    const response = await fetch(dataURL, {
+        method: 'PUT',
+        headers: {
+            'Content-type': 'application/json',
+            'Authorization': localStorage.getItem('TOKEN')
+        },
+        body: JSON.stringify(recurringObject)
+    });
+    const result = await response.json();
+    return result
+}
