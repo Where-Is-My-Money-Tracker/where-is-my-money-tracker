@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getCategories } from '../fetch-utils';
+import { findById } from '../helper-functions';
 // import Dropdown from './Dropdown';
 
 class AddRecurringPurchaseItem extends Component {
@@ -51,6 +52,17 @@ handleSubmit = async (event) => {
                     <p>Frequency (days)</p>
                     <input type='number' onChange={(e) => this.handleChange(e, 'frequency')}/>
                     <br></br>
+                    {/* <label>Current Category: {
+                        this.state.parentCategory === 0 ? 'none' :
+                    findById( 'Parent Category Descripion Goes Here', this.state.parentCategory).description}
+                        
+                        { async() => {
+                        const categories = await getCategories();
+                        if (this.state.parentCategory === 0) return 'none';
+                        return findById(categories, this.state.parentCategory).description;
+                    }}
+                    
+                    </label> */}
                     <select 
                         onChange={(e) => this.handleCategoryChange(e)}
                         value={this.state.optionSelector}
@@ -63,12 +75,13 @@ handleSubmit = async (event) => {
                         ))};
                         <option value='add new category'>Add a category</option>
                     </select>
-                    {this.state.optionSelector === 'add new category' 
-                            ? <input type="text"
+                        {this.state.optionSelector === 'add new category' 
+                            ? <input
+                                type="text"
                                 onChange={(e)=> this.handleChange(e, 'newCategoryInput')}
                               ></input> 
-                            : <p></p>} 
-
+                            : <p></p>
+                        } 
                 </form>
             </>
         );
