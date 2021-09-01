@@ -14,6 +14,7 @@ class Signin extends Component {
             }, 'signin'
         );
         this.props.setToken(token);
+        this.props.history.push('/user')
     };
 
     render() { 

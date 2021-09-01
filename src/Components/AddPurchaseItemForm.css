@@ -1,0 +1,44 @@
+.addPurchaseForm h1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Roboto';
+}
+.purchaseInput {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 2px solid #283618;
+    border-radius: 3px;
+    margin: 0 25%;
+    background-color: #DDA15E;
+    box-shadow: 5px 5px 5px gray;
+    font-family: 'Roboto';
+}
+.purchaseInput p, label {
+    font-size: 1.5rem;
+}
+
+#dropDownLabel {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+#dropDownLabel p {
+    text-align: center;
+    padding: 10px;
+    font-size: 1.1rem;
+}
+#submit-button {
+    margin-bottom: 12px;
+    height: 2rem;
+    font-size: 1.5rem;
+    font-family: 'Roboto';
+    border-radius: 2px;
+    background-color: #C2C5AA
+}
+button:hover {
+    cursor: pointer;
+    color: #A68A64;
+    font-weight: bold;
+}

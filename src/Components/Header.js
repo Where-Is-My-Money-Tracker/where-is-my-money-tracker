@@ -1,13 +1,19 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
+import './Header.css';
 
 class Header extends Component {
     state = {  }
     render() { 
         return ( 
-            <>
-                <NavLink to="/logout">Logout</NavLink>
-            </>
+            <div className="header">
+                <NavLink to="/user">Back to Profile</NavLink>
+                <button onClick={() => {
+                    localStorage.removeItem('TOKEN')
+                    window.location.replace('/')
+                }}>
+                Logout</button>
+            </div>
          );
     }
 }
