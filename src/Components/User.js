@@ -1,6 +1,7 @@
 import { Component } from 'react';
+import { NavLink } from 'react-router-dom';
 // import { getPurchases } from '../fetch-utils.js';
-import AddPurchaseItem from './AddPurchaseItemForm.js';
+// import AddPurchaseItem from './AddPurchaseItemForm.js';
 
 class User extends Component {
     state = { 
@@ -13,7 +14,9 @@ class User extends Component {
         return ( 
             <>
                 <h1>Welcome to user</h1>
-                <AddPurchaseItem></AddPurchaseItem>
+                <NavLink to='/addpurchaseitem'>Add New Expense</NavLink> 
+                <NavLink to='/addrecurringpurchaseitem'>Add Recurring Expense</NavLink>
+
             </>
          );
     }
