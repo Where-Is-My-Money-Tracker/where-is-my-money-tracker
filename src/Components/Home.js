@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Signin from './SignInForm.js';
 import { NavLink } from 'react-router-dom';
-import User from './User.js';
 
 class Home extends Component {
     state = {  }

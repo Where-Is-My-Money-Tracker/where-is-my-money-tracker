@@ -23,7 +23,6 @@ export async function getPurchases(){
         }
     })
     const result = await response.json();
-    console.log(result)
     return result
 }
 
