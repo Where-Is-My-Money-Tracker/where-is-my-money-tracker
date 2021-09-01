@@ -1,0 +1,42 @@
+.modifyPurchase {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: 'Roboto';
+    border: 2px solid #283618;
+    border-radius: 3px;
+    margin: 10% 25%;
+    background-color: #DDA15E;
+    box-shadow: 5px 5px 5px gray;
+    font-family: 'Roboto';
+}
+.purchases {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.2rem;
+}
+.purchase {
+    width: 100%;
+    margin: 5px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    padding-left: 5px;
+}
+.buttons {
+    width: 120px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+button {
+    font-family: 'Roboto';
+    border-radius: 2px;
+    background-color: #C2C5AA
+}
+button:hover {
+    cursor: pointer;
+    color: #A68A64;
+    font-weight: bold;
+}

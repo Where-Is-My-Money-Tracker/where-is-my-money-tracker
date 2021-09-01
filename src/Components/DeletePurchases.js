@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { deletePurchase, getPurchases } from '../fetch-utils';
+import './ModifyRecurringPurchaseItems.css';
 
 class DeletePurchases extends Component {
     state = { 
@@ -16,14 +17,18 @@ class DeletePurchases extends Component {
     }
     render() { 
         return ( 
-            <>
+            <section className="modifyPurchase">
                 <h1>Delete a Purchase</h1>
+                <article className="purchases">
                 {this.state.allPurchases.map(item => (
-                    <div key={item.id}>{item.description} {item.cost}
+                    <div className="purchase" key={item.id}>{item.description} {item.cost}
+                        <div className="buttons">
                         <button onClick={() => this.handleDelete(item)}>Delete</button>
+                        </div>
                     </div>
                 ))}
-            </>
+                </article>
+            </section>
         );
     }
 }

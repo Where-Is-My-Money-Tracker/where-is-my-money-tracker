@@ -10,6 +10,7 @@ import Home from './Components/Home.js';
 import AboutUs from './Components/AboutUs.js';
 import User from './Components/User.js';
 import DeletePurchases from './Components/DeletePurchases.js';
+import './App.css';
 
 class App extends Component {
   state = { 

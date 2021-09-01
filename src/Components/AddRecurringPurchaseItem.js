@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { getCategories, postCategories, postRecurring } from '../fetch-utils';
 import { findById } from '../helper-functions';
 // import Dropdown from './Dropdown';
+import './AddPurchaseItemForm.css';
 
 class AddRecurringPurchaseItem extends Component {
     state = {
@@ -66,9 +67,9 @@ handleSubmit = async (e) => {
             labelMessage = findById(this.state.allCategories, Number(this.state.parentCategory)).description;
         }
         return (
-            <>
+            <div className="addPurchaseForm">
                 <h1>Add Recurring Purchase Item Form</h1>
-                <form onSubmit={(e) => this.handleSubmit(e)}>
+                <form onSubmit={(e) => this.handleSubmit(e)} className="purchaseInput">
                     <p>Item description</p>
                     <input type='text' onChange={(e) => this.handleChange(e, 'description')} />
                     <p>Item cost</p>
@@ -76,7 +77,7 @@ handleSubmit = async (e) => {
                     <p>Frequency (days)</p>
                     <input type='number' onChange={(e) => this.handleChange(e, 'frequency')}/>
                     <br></br>
-                    <label>
+                    <label id="dropDownLabel">
                         Current Category: {labelMessage}
                         <br></br>
                         <p>Use the selector below to choose a subcategory of or add a new subcategory to {labelMessage}</p>
@@ -101,9 +102,9 @@ handleSubmit = async (e) => {
                               ></input> 
                             : <p></p>
                         } 
-                    <button type='sumit'>Submit</button>
+                    <button id="submit-button" type='sumit'>Submit</button>
                 </form>
-            </>
+            </div>
         );
     }
 }
