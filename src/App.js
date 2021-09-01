@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
-// import AddPurchaseItem from './Components/AddPurchaseItemForm.js';
+import AddPurchaseItem from './Components/AddPurchaseItemForm.js';
 import AddRecurringPurchaseItem from './Components/AddRecurringPurchaseItem.js';
 // import ModifyRecurringPurchaseItem from './Components/ModifyRecurringPurchaseItem.js';
 import Signin from './Components/SignInForm.js';
@@ -35,7 +35,7 @@ class App extends Component {
                   {...routerProps}/>
                 )}>
         </Route>
-        {/* <Route path="/addpurchaseitem" 
+        <Route path="/addpurchaseitem" 
                 render={(routerProps) => (
                   this.state.token ?
                   <AddPurchaseItem
@@ -43,7 +43,7 @@ class App extends Component {
                   {...routerProps}/>
                   : <Redirect to='/' />
                 )}>
-        </Route> */}
+        </Route>
         <Route path="/addrecurringpurchaseitem" 
                 render={(routerProps) => (
                   this.state.token ?
