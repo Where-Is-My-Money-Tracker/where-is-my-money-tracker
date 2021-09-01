@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { deleteRecurring, getRecurring, putRecurring } from '../fetch-utils.js';
+import './ModifyRecurringPurchaseItems.css';
 
 //old mortgage timestamp: 1630458287409
 class ModifyRecurringPurchaseItem extends Component {
@@ -26,15 +27,19 @@ class ModifyRecurringPurchaseItem extends Component {
 
     render() { 
         return ( 
-            <>
+            <section className="modifyPurchase">
                 <h1>Stop or Delete Recurring Purchases</h1>
+                <article className="purchases">
                 {this.state.allRecurring.map(item => (
-                    <div key={item.id}>{item.description} {item.cost}
+                    <div className="purchase" key={item.id}>{item.description} {item.cost}
+                        <div className="buttons">
                         <button onClick={() => this.handleStop(item)}>Stop</button>
                         <button onClick={() => this.handleDelete(item)}>Delete</button>
+                        </div>
                     </div>
                 ))}
-            </>
+                </article>
+            </section>
          );
     }
 }
