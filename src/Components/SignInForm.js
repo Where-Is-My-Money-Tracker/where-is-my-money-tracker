@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { getToken } from '../fetch-utils.js';
+import './SignInForm.css';
 
 class Signin extends Component {
     state = { email: '', password: '' };
@@ -18,10 +19,10 @@ class Signin extends Component {
     };
 
     render() { 
-        console.log(this.props.setToken)
         return (
             <>
-                <h1>Sign-in</h1>
+                <h1 id="signinHeader">Sign-in</h1>
+            <section className="signinForm">
                 <form onSubmit={this.handleSubmit}>
                     <div className='form-control'>
                         <label>Email: </label>
@@ -41,8 +42,11 @@ class Signin extends Component {
                             }}
                         />
                     </div>
-                    <button>Sign-in</button>
+                    <div className="buttonDiv">
+                        <button>Sign-in</button>
+                    </div>
                 </form>
+            </section>
             </>
         );
     }

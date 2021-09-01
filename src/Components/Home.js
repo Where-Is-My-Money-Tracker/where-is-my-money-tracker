@@ -1,28 +1,29 @@
 import React, { Component } from 'react';
 import Signin from './SignInForm.js';
 import { NavLink } from 'react-router-dom';
+import './Home.css';
 
 class Home extends Component {
     state = {  }
     
     render() { 
         return ( 
-            <section>
+            <section className="container">
                 <article>
                     {/* put more things here? Heading? Welcome message? */}
                     {!this.props.token ? 
-                    <div>
+                    <div id="signin">
                         <Signin
                         setToken={this.props.setToken}
                         history={this.props.history}
                         /> 
-                        <NavLink to="/signup">Sign-up</NavLink> 
+                        <article id="signupLink">
+                            <p>New User:</p>
+                            <NavLink to="/signup">Sign-up Here</NavLink> 
+                        </article>
                     </div> :
-                        <NavLink to='/user'>See Your Finances</NavLink>
+                        <NavLink id="financeLink" to='/user'>See Your Finances</NavLink>
                     }
-                </article>
-                <article>
-                    <NavLink to="/aboutus">About the Developers</NavLink>
                 </article>
             </section>
          );
