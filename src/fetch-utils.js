@@ -82,6 +82,7 @@ export async function postRecurring(recurringObject){
         body: JSON.stringify(recurringObject)
     });
     const result = await response.json();
+    console.log(result);
     return result
 }
 
