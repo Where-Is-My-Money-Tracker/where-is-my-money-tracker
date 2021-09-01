@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import { getPurchases } from '../fetch-utils.js';
+// import { getPurchases } from '../fetch-utils.js';
 import AddPurchaseItem from './AddPurchaseItemForm.js';
 
 class User extends Component {

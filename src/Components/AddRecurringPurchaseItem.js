@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { getCategories } from '../fetch-utils';
+import { getCategories, postCategories, postRecurring } from '../fetch-utils';
 import { findById } from '../helper-functions';
 // import Dropdown from './Dropdown';
 
@@ -7,7 +7,7 @@ class AddRecurringPurchaseItem extends Component {
     state = {
         parentCategory: 0,
         childCategories: [],
-        optionSelector: 'add new category',
+        optionSelector: '--',
         cost: '',
         description: '',
         frequency: 0,
@@ -34,39 +34,58 @@ handleCategoryChange = async (event) => {
     const categories = await getCategories();
     const childCategories = categories.filter(item => item.parent_id === Number(event.target.value));
     this.setState({ childCategories });
-    console.log(this.state);
 }
 
-handleSubmit = async (event) => {
-    event.preventDefault();
-
+handleSubmit = async (e) => {
+    const obj = {
+        category_id: this.state.parentCategory,
+        description: this.state.description,
+        cost: this.state.cost,
+        frequency: this.state.frequency,
+        start_timestamp: Date.now(),
+        stop_timestamp: Date.now()
+    }
+    e.preventDefault();
+    if (this.state.optionSelector === 'add new category') {
+        const newCategory = await postCategories(
+            {
+                description: this.state.newCategoryInput,
+                parent_id: Number(this.state.parentCategory)
+            }
+        )
+        obj.category_id = newCategory.id;
+    }
+    await postRecurring(obj);
 }
 
     render() {
         let labelMessage;
         if (Number(this.state.parentCategory) === 0) {
-            labelMessage ='none';
+            labelMessage ='Main';
         } else {
             labelMessage = findById(this.state.allCategories, Number(this.state.parentCategory)).description;
         }
         return (
             <>
                 <h1>Add Recurring Purchase Item Form</h1>
-                <form>
+                <form onSubmit={(e) => this.handleSubmit(e)}>
                     <p>Item description</p>
                     <input type='text' onChange={(e) => this.handleChange(e, 'description')} />
                     <p>Item cost</p>
-                    <input type='number' onChange={(e) => this.handleChange(e, 'cost')} />
+                    <input type='number' step='0.01' onChange={(e) => this.handleChange(e, 'cost')} />
                     <p>Frequency (days)</p>
                     <input type='number' onChange={(e) => this.handleChange(e, 'frequency')}/>
                     <br></br>
-                    <label>Current Category: {labelMessage}
-                    <br></br>
+                    <label>
+                        Current Category: {labelMessage}
+                        <br></br>
+                        <p>Use the selector below to choose a subcategory of or add a new subcategory to {labelMessage}</p>
                     </label>
                     <select 
                         onChange={(e) => this.handleCategoryChange(e)}
                         value={this.state.optionSelector}
                     >
+                        <option value='--'>--</option>
                         {this.state.childCategories.map( (cat) => (
                             <option
                                 key={cat.id}
@@ -77,11 +96,12 @@ handleSubmit = async (event) => {
                     </select>
                         {this.state.optionSelector === 'add new category' 
                             ? <input
-                                type="text"
+                                type='text'
                                 onChange={(e)=> this.handleChange(e, 'newCategoryInput')}
                               ></input> 
                             : <p></p>
                         } 
+                    <button type='sumit'>Submit</button>
                 </form>
             </>
         );
