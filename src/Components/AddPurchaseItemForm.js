@@ -78,7 +78,7 @@ class AddPurchaseItem extends Component {
                     <br></br>
                     <label id="dropDownLabel">Current Category: {labelMessage}
                         <br></br>
-                        <p>Select below a subcategory of {labelMessage} or add a new subcategory to {labelMessage}</p>
+                        <p><i>Select below a subcategory of {labelMessage} or add a new subcategory to {labelMessage}</i></p>
                     </label>
                     <select onChange={(e) => this.handleCategoryChange(e)}
                             value={this.state.optionSelector}
