@@ -1,8 +1,6 @@
 import { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { getPurchases, getCategories } from '../fetch-utils.js';
-import { findPurchasesByParentId } from '../helper-functions.js';
-// import AddPurchaseItem from './AddPurchaseItemForm.js';
 
 class User extends Component {
     state = { 
@@ -29,7 +27,7 @@ class User extends Component {
                 <p>Or, look at these expenses!</p>
                 <div>
                     {this.state.allPurchases.map((item)=> (
-                        <div>
+                        <div key={item.id}>
                             <p>{item.description} {item.cost}</p>
                         </div>
                     ))}
@@ -37,6 +35,7 @@ class User extends Component {
                 <NavLink to='/addpurchaseitem'>Add New Expense</NavLink> 
                 <NavLink to='/addrecurringpurchaseitem'>Add Recurring Expense</NavLink>
                 <NavLink to='/modifyrecurringpurchaseitem'>Modify Recurring Expense</NavLink>
+                <NavLink to='/deletepurchases'>Delete a Purchase</NavLink>
             </>
          );
     }

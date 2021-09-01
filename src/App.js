@@ -9,6 +9,7 @@ import Header from './Components/Header.js';
 import Home from './Components/Home.js';
 import AboutUs from './Components/AboutUs.js';
 import User from './Components/User.js';
+import DeletePurchases from './Components/DeletePurchases.js';
 
 class App extends Component {
   state = { 
@@ -67,6 +68,15 @@ class App extends Component {
                 render={(routerProps) => (
                   this.state.token ?
                   <ModifyRecurringPurchaseItem
+                  token={this.state.token}
+                  {...routerProps}/>
+                  : <Redirect to='/' />
+                )}>
+        </Route>
+        <Route path="/deletepurchases" 
+                render={(routerProps) => (
+                  this.state.token ?
+                  <DeletePurchases
                   token={this.state.token}
                   {...routerProps}/>
                   : <Redirect to='/' />
