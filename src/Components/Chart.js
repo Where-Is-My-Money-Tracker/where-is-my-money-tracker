@@ -1,16 +1,17 @@
 import {Pie} from 'react-chartjs-2';
 import React, { Component } from 'react';
 
-// class PieChart extends Component {
+const props = {
+    "Food":30.91, "Pets":31.7, "Subscriptions":0 , "Self improvement":299, "mortgage":0
+} 
 
-//     constructor(props) {
-//         super(props)
-//     this.state = { 
 
-const data = {
-        labels: ['description'],
+
+    const data = {
+        labels: Object.keys(props),
         datasets: [{
-            data: ['description', 'total_cost'],
+            label: 'Yo Money',
+            data:  Object.values(props),
             backgroundColor: [
                 'rgba(127, 79, 36, 1)',
                 'rgba(147, 102, 57, 1)',
@@ -34,25 +35,9 @@ const data = {
                 'rgba(51, 61, 41, 1)'
             ],
             borderWidth: 1,
-        }],
-     };
-
-//     render() { 
-//         return ( 
-//             <div>
-//                 <h1>Spending Breakdown</h1>
-//                 <Pie
-//                 data={{
-//                     labels: this.state.labels,
-//                     datasets: this.state.datasets
-//                 }}
-//                 height='50%'
-//                 />
-//                 <br />
-//             </div>
-//          );
-//     }
-// } 
+            height: '50%'
+        }]
+    }
 
 const PieChart = () => (
     <>

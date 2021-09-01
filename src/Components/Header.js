@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
-import {NavLink} from 'react-router-dom';
 
 class Header extends Component {
     state = {  }
     render() { 
         return ( 
             <>
-                <NavLink to="/logout">Logout</NavLink>
+                <button onClick={() => {
+                    localStorage.removeItem('TOKEN')
+                    window.location.replace('/')
+                }}>
+                Logout</button>
             </>
          );
     }
