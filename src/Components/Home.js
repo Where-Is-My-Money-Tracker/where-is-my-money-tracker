@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import Signin from './SignInForm.js';
 import { NavLink } from 'react-router-dom';
+import './Home.css';
 
 class Home extends Component {
     state = {  }
     
     render() { 
         return ( 
-            <section>
+            <section className="container">
                 <article>
                     {/* put more things here? Heading? Welcome message? */}
                     {!this.props.token ? 
