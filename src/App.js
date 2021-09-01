@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { BrowserRouter, Switch, Route, Redirect } from 'react-router-dom';
 import AddPurchaseItem from './Components/AddPurchaseItemForm.js';
 import AddRecurringPurchaseItem from './Components/AddRecurringPurchaseItem.js';
-// import ModifyRecurringPurchaseItem from './Components/ModifyRecurringPurchaseItem.js';
+import ModifyRecurringPurchaseItem from './Components/ModifyRecurringPurchaseItem.js';
 import Signin from './Components/SignInForm.js';
 import Signup from './Components/SignUpForm.js';
 import Header from './Components/Header.js';
@@ -53,7 +53,7 @@ class App extends Component {
                   : <Redirect to='/' />
                 )}>
         </Route>
-        {/* <Route path="/modifyrecurringpurchaseitem" 
+        <Route path="/modifyrecurringpurchaseitem" 
                 render={(routerProps) => (
                   this.state.token ?
                   <ModifyRecurringPurchaseItem
@@ -61,7 +61,7 @@ class App extends Component {
                   {...routerProps}/>
                   : <Redirect to='/' />
                 )}>
-        </Route> */}
+        </Route>
         <Route path="/aboutus"
           render={(routerProps) => (
             <AboutUs
