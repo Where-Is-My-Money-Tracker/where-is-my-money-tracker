@@ -1,5 +1,6 @@
 import { Component } from 'react';
 import { getPurchases } from '../fetch-utils.js';
+import AddPurchaseItem from './AddPurchaseItemForm.js';
 
 class User extends Component {
     state = { 
@@ -7,13 +8,12 @@ class User extends Component {
         childCategories: [],
         timeWindow: 0 
     }
-    componentDidMount = async() => {
-    getPurchases();
-}
+    componentDidMount = async() => {}
     render() { 
         return ( 
             <>
                 <h1>Welcome to user</h1>
+                <AddPurchaseItem></AddPurchaseItem>
             </>
          );
     }
