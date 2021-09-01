@@ -144,3 +144,16 @@ export async function deleteRecurring(recurringObject){
     const result = await response.json();
     return result
 }
+
+//DadJoke
+export async function getDadJoke(){
+    const dataURL = 'https://icanhazdadjoke.com/'
+    const response = await fetch(dataURL, {
+        method: 'GET',
+        headers: {
+            'Accept': 'application/json'
+        }
+    })
+    const result = await response.json()
+    return result;
+}
