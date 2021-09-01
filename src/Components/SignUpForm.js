@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { getToken } from '../fetch-utils.js';
+import './SignInForm.css';
+import './SignUpForm.css';
 
 class Signup extends Component {
     state = { email: '', password: '' };
@@ -14,35 +16,38 @@ class Signup extends Component {
             }, 'signup'
         );
         this.props.setToken(token);
-
         this.props.history.push('/user');
     };
 
     render() { 
         return (
             <>
-                <h1>Sign-up</h1>
-                <form onSubmit={this.handleSubmit}>
-                    <div className='form-control'>
-                        <label>Email: </label>
-                        <input
-                            type='email'
-                            onChange={ (event) => {
-                                this.setState({ email: event.target.value })
-                            }}
-                        />
-                    </div>
-                    <div className='form-control'>
-                        <label>Password: </label>
-                        <input
-                            type='password'
-                            onChange={ (event) => {
-                                this.setState({ password: event.target.value })
-                            }}
-                        />
-                    </div>
-                    <button>Sign-up</button>
-                </form>
+                <h1 id="signinHeader">Sign-up</h1>
+                <section className="signinForm">
+                    <form onSubmit={this.handleSubmit}>
+                        <div className='form-control'>
+                            <label>Email: </label>
+                            <input
+                                type='email'
+                                onChange={ (event) => {
+                                    this.setState({ email: event.target.value })
+                                }}
+                            />
+                        </div>
+                        <div className='form-control'>
+                            <label>Password: </label>
+                            <input
+                                type='password'
+                                onChange={ (event) => {
+                                    this.setState({ password: event.target.value })
+                                }}
+                            />
+                        </div>
+                        <div className="buttonDiv">
+                            <button>Sign-up</button>
+                        </div>
+                    </form>
+                </section>
             </>
         );
     }

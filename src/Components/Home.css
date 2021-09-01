@@ -13,8 +13,27 @@ a:hover {
     justify-content: space-around;
     height: 80vh;
 }
-article {
+#financeLink {
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
+    margin-top: 30px;
+}
+#signin {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
+#signupLink {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+    margin: 0px 160px;
+}
+#signupLink p {
+    font-size: 1.5rem;
+}
+#signupLink a {
+    margin-left: 10px;
 }

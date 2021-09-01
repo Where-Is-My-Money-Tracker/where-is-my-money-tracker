@@ -8,11 +8,11 @@ class Header extends Component {
         return ( 
             <div className="header">
                 <NavLink to="/user">Back to Profile</NavLink>
+                <NavLink to="/aboutus">About the Developers</NavLink>
                 <button onClick={() => {
                     localStorage.removeItem('TOKEN')
                     window.location.replace('/')
-                }}>
-                Logout</button>
+                }}>Logout</button>
             </div>
          );
     }
