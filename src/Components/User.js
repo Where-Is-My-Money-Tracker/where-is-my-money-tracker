@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { NavLink } from 'react-router-dom';
 import { getPurchases, getCategories } from '../fetch-utils.js';
-import { findByParentId, mungeChartData } from '../helper-functions.js';
+import { findByParentId, mungeChartData, findById } from '../helper-functions.js';
 import PieChart from './Chart.js';
 import insertChartData from '../chart-api.js';
 
@@ -10,14 +10,17 @@ class User extends Component {
         optionSelector: '--',
         parentCategory: 0,
         childCategories: [],
-        timeWindow: 0,
+        timeWindow: 31536000,
         allPurchases: [],
         allCategories: [],
         filteredPurchases: [],
         chartData: []
     }
-    //TODO
-    //write data munging functions to get everything ready for charts etc
+
+    handleChange = async (e,key) => {
+        this.setState({ [key]: e.target.value });
+    }
+
     componentDidMount = async() => {
         const allPurchases = await getPurchases();
         const allCategories = await getCategories();
@@ -33,15 +36,36 @@ class User extends Component {
         const childCategories = this.state.allCategories.filter(item => item.parent_id === Number(event.target.value));
         this.setState({ childCategories });
         const chartData = mungeChartData(childCategories, this.state.allCategories, this.state.allPurchases);
-        console.log(chartData);
         this.setState({ chartData: chartData });
     }   
+
+    handleGoBack = async () => {
+        const parentId = findById(this.state.allCategories, Number(this.state.parentCategory)).parent_id;
+        this.setState({ parentCategory: parentId });
+        const childCategories = this.state.allCategories.filter(item => item.parent_id === parentId);
+        this.setState({ childCategories });
+        const chartData = mungeChartData(childCategories, this.state.allCategories, this.state.allPurchases);
+        this.setState({ chartData: chartData });
+    }
 
     render() { 
         return ( 
             <>
                 <h1>Welcome to user</h1>
                 <PieChart data={insertChartData(this.state.chartData)}/> 
+                <label htmlFor='time window'>Time Window</label>
+                <select 
+                    name='time window' 
+                    value={this.state.timeWindow}
+                    onChange={(e) => this.handleChange()}
+                >
+                    <option value={31536000}>Year</option>
+                    <option value={15768000}>6 Months</option>
+                    <option value={7884000}>3 Months</option>
+                    <option value={2628000}>Month</option>
+                    <option value={604800}>Week</option>
+                </select>
+                <button onClick={this.handleGoBack}>Back</button>
                 <select 
                         onChange={(e) => this.handleCategoryChange(e)}
                         value={this.state.optionSelector}
