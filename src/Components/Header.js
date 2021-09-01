@@ -6,7 +6,11 @@ class Header extends Component {
     render() { 
         return ( 
             <>
-                <NavLink to="/logout">Logout</NavLink>
+                <button onClick={() => {
+                    localStorage.removeItem('TOKEN')
+                    window.location.replace('/')
+                }}>
+                Logout</button>
             </>
          );
     }
