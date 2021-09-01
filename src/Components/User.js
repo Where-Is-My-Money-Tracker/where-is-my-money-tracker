@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { getPurchases, getCategories } from '../fetch-utils.js';
 import { findByParentId, mungeChartData } from '../helper-functions.js';
 import PieChart from './Chart.js';
+import insertChartData from '../chart-api.js';
 
 class User extends Component {
     state = { 
@@ -36,13 +37,11 @@ class User extends Component {
         this.setState({ chartData: chartData });
     }   
 
-    
-
     render() { 
         return ( 
             <>
                 <h1>Welcome to user</h1>
-                <PieChart data={this.state.chartData}/> 
+                <PieChart data={insertChartData(this.state.chartData)}/> 
                 <select 
                         onChange={(e) => this.handleCategoryChange(e)}
                         value={this.state.optionSelector}
