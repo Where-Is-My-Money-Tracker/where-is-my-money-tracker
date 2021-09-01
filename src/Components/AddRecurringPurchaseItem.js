@@ -57,6 +57,7 @@ handleSubmit = async (e) => {
         obj.category_id = newCategory.id;
     }
     await postRecurring(obj);
+    this.props.history.push('/user')
 }
 
     render() {
@@ -71,9 +72,9 @@ handleSubmit = async (e) => {
                 <h1>Add Recurring Purchase Item Form</h1>
                 <form onSubmit={(e) => this.handleSubmit(e)} className="purchaseInput">
                     <p>Item description</p>
-                    <input type='text' onChange={(e) => this.handleChange(e, 'description')} />
+                    <input type='text' onChange={(e) => this.handleChange(e, 'description')} required/>
                     <p>Item cost</p>
-                    <input type='number' step='0.01' onChange={(e) => this.handleChange(e, 'cost')} />
+                    <input type='number' step='0.01' onChange={(e) => this.handleChange(e, 'cost')} required/>
                     <p>Frequency (days)</p>
                     <input type='number' onChange={(e) => this.handleChange(e, 'frequency')}/>
                     <br></br>
