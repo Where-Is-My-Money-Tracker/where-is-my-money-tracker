@@ -8,8 +8,9 @@ class Home extends Component {
     
     render() { 
         return ( 
-            <div>
-                <section>
+            <section>
+                <article>
+                    {/* put more things here? Heading? Welcome message? */}
                     {!this.props.token ? 
                     <div>
                         <Signin
@@ -18,13 +19,13 @@ class Home extends Component {
                         /> 
                         <NavLink to="/signup">Sign-up</NavLink> 
                     </div> :
-                        <User />
+                        <NavLink to='/user'>See Your Finances</NavLink>
                     }
-                </section>
-                <section>
+                </article>
+                <article>
                     <NavLink to="/aboutus">About the Developers</NavLink>
-                </section>
-            </div>
+                </article>
+            </section>
          );
     }
 }
