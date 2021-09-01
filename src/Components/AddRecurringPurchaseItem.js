@@ -11,11 +11,13 @@ class AddRecurringPurchaseItem extends Component {
         cost: '',
         description: '',
         frequency: 0,
+        allCategories: [],
         newCategoryInput: ''
     }
 
 componentDidMount = async () => {
     const categories = await getCategories();
+    this.setState({ allCategories: categories });
     const childCategories = categories.filter(item => item.parent_id === this.state.parentCategory);
     this.setState({ childCategories });
 }
@@ -40,7 +42,13 @@ handleSubmit = async (event) => {
 
 }
 
-    render() { 
+    render() {
+        let labelMessage;
+        if (Number(this.state.parentCategory) === 0) {
+            labelMessage ='none';
+        } else {
+            labelMessage = findById(this.state.allCategories, Number(this.state.parentCategory)).description;
+        }
         return (
             <>
                 <h1>Add Recurring Purchase Item Form</h1>
@@ -52,17 +60,9 @@ handleSubmit = async (event) => {
                     <p>Frequency (days)</p>
                     <input type='number' onChange={(e) => this.handleChange(e, 'frequency')}/>
                     <br></br>
-                    {/* <label>Current Category: {
-                        this.state.parentCategory === 0 ? 'none' :
-                    findById( 'Parent Category Descripion Goes Here', this.state.parentCategory).description}
-                        
-                        { async() => {
-                        const categories = await getCategories();
-                        if (this.state.parentCategory === 0) return 'none';
-                        return findById(categories, this.state.parentCategory).description;
-                    }}
-                    
-                    </label> */}
+                    <label>Current Category: {labelMessage}
+                    <br></br>
+                    </label>
                     <select 
                         onChange={(e) => this.handleCategoryChange(e)}
                         value={this.state.optionSelector}
