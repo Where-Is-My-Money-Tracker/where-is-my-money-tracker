@@ -8,6 +8,7 @@ import Signup from './Components/SignUpForm.js';
 import Header from './Components/Header.js';
 import Home from './Components/Home.js';
 import AboutUs from './Components/AboutUs.js';
+import User from './Components/User.js';
 
 class App extends Component {
   state = { 
@@ -33,6 +34,15 @@ class App extends Component {
                   <Signup
                   setToken={this.setToken}
                   {...routerProps}/>
+                )}>
+        </Route>
+        <Route path='/user'
+                render={(routerProps) => (
+                  this.state.token ?
+                  <User
+                  token={this.state.token}
+                  {...routerProps}/>
+                  : <Redirect to='/' />
                 )}>
         </Route>
         <Route path="/addpurchaseitem" 
