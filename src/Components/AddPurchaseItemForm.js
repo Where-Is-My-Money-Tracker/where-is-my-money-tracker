@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { getCategories, postCategories, postPurchase } from '../fetch-utils.js';
 import { findById } from '../helper-functions.js';
+import './AddPurchaseItemForm.css';
 
 class AddPurchaseItem extends Component {
     state = { 
@@ -61,9 +62,9 @@ class AddPurchaseItem extends Component {
             labelMessage = findById(this.state.allCategories, Number(this.state.parentCategory).description)
         }
         return ( 
-            <>
+            <div className="addPurchaseForm">
                 <h1>Add New Purchase</h1>
-                <form onSubmit={this.handlePurchase}>
+                <form onSubmit={this.handlePurchase} className="purchaseInput">
                     <p>Item Description</p>
                     <input type='text'
                         onChange={(event)=> this.setState({description: event.target.value})}
@@ -75,9 +76,9 @@ class AddPurchaseItem extends Component {
                         required>
                     </input>
                     <br></br>
-                    <label>Current Category: {labelMessage}
+                    <label id="dropDownLabel">Current Category: {labelMessage}
                         <br></br>
-                        <p>Use the selector below to choose a subcategory of {labelMessage} or add a new subcategory to {labelMessage}</p>
+                        <p>Select below a subcategory of {labelMessage} or add a new subcategory to {labelMessage}</p>
                     </label>
                     <select onChange={(e) => this.handleCategoryChange(e)}
                             value={this.state.optionSelector}
@@ -93,9 +94,9 @@ class AddPurchaseItem extends Component {
                         onChange={(e)=> this.setState({newCategoryInput: e.target.value})}
                         ></input> 
                     : <p></p>} 
-                    <button>Submit purchase item</button>
+                    <button id="submit-button">Submit</button>
                 </form>
-            </>
+            </div>
          );
     }
 }
