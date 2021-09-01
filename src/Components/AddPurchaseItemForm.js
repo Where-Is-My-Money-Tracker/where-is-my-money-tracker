@@ -15,7 +15,7 @@ class AddPurchaseItem extends Component {
         allCategories: []
      }
 
-     componentDidMount= async() => {
+     componentDidMount = async() => {
         const categories = await getCategories()  
         this.setState({allCategories: categories})
         const childCategories = categories.filter(item => item.parent_id === this.state.parentCategory)
@@ -52,6 +52,7 @@ class AddPurchaseItem extends Component {
             newPurchase.category_id = newCategory.id
         }
          await postPurchase(newPurchase)
+         this.props.history.push('/user')
     }
 
     render() {
@@ -64,7 +65,7 @@ class AddPurchaseItem extends Component {
         return ( 
             <div className="addPurchaseForm">
                 <h1>Add New Purchase</h1>
-                <form onSubmit={this.handlePurchase} className="purchaseInput">
+                <form onSubmit={(e)=> this.handleSubmitPurchase(e)} className="purchaseInput">
                     <p>Item Description</p>
                     <input type='text'
                         onChange={(event)=> this.setState({description: event.target.value})}
