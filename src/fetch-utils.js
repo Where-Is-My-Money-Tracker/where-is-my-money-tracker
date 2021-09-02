@@ -25,8 +25,6 @@ export async function getPurchases(){
     const result = await response.json();
     return result
 }
-
-//getRecurring
 export async function getRecurring(){
     const data = `${URL}/api/recurring`
     const response = await fetch(data, {
@@ -39,8 +37,6 @@ export async function getRecurring(){
     const result = await response.json();
     return result
 }
-
-//getCategories
 export async function getCategories(){
     const data = `${URL}/api/categories`
     const response = await fetch(data, {
@@ -53,8 +49,6 @@ export async function getCategories(){
     const result = await response.json();
     return result
 }
-
-//postPurchases
 export async function postPurchase(purchaseObject){
     const dataURL = `${URL}/api/purchases`
     const response = await fetch(dataURL, {
@@ -68,8 +62,6 @@ export async function postPurchase(purchaseObject){
     const result = await response.json();
     return result
 }
-
-//postRecurring
 export async function postRecurring(recurringObject){
     const dataURL = `${URL}/api/recurring`
     const response = await fetch(dataURL, {
@@ -81,11 +73,8 @@ export async function postRecurring(recurringObject){
         body: JSON.stringify(recurringObject)
     });
     const result = await response.json();
-    console.log(result);
     return result
 }
-
-//postCategories
 export async function postCategories(categoryObject){
     const dataURL = `${URL}/api/categories`
     const response = await fetch(dataURL, {
@@ -99,8 +88,6 @@ export async function postCategories(categoryObject){
     const result = await response.json();
     return result
 }
-
-//putRecurring
 export async function putRecurring(recurringObject){
     const dataURL = `${URL}/api/recurring/${recurringObject.id}`
     const response = await fetch(dataURL, {
@@ -114,8 +101,6 @@ export async function putRecurring(recurringObject){
     const result = await response.json();
     return result
 }
-
-//deletePurchase
 export async function deletePurchase(purchaseObject){
     const dataURL = `${URL}/api/purchases/${purchaseObject.id}`
     const response = await fetch(dataURL, {
@@ -124,13 +109,10 @@ export async function deletePurchase(purchaseObject){
             'Content-type': 'application/json',
             'Authorization': localStorage.getItem('TOKEN')
         },
-        // body: JSON.stringify(purchaseObject)
     });
     const result = await response.json();
     return result
 }
-
-//deleteRecurring
 export async function deleteRecurring(recurringObject){
     const dataURL = `${URL}/api/recurring/${recurringObject.id}`
     const response = await fetch(dataURL, {
@@ -139,13 +121,10 @@ export async function deleteRecurring(recurringObject){
             'Content-type': 'application/json',
             'Authorization': localStorage.getItem('TOKEN')
         },
-        // body: JSON.stringify(recurringObject)
     });
     const result = await response.json();
     return result
 }
-
-//DadJoke
 export async function getDadJoke(){
     const dataURL = 'https://icanhazdadjoke.com/'
     const response = await fetch(dataURL, {

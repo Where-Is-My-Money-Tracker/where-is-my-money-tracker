@@ -38,7 +38,7 @@ class App extends Component {
                   {...routerProps}/>
                 )}>
         </Route>
-        <Route path='/user'
+        <Route path="/user"
                 render={(routerProps) => (
                   this.state.token ?
                   <User
@@ -87,8 +87,8 @@ class App extends Component {
           render={(routerProps) => (
             <AboutUs
             {...routerProps}/>
-          )}
-        ></Route>
+          )}>
+        </Route>
         <Route exact path="/" 
         render={(routerProps) => (
           <Home
