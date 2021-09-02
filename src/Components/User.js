@@ -4,6 +4,7 @@ import { getPurchases, getCategories } from '../fetch-utils.js';
 import { findByParentId, mungeChartData, findById } from '../helper-functions.js';
 import PieChart from './Chart.js';
 import insertChartData from '../chart-api.js';
+import './User.css';
 
 class User extends Component {
     state = { 
@@ -50,48 +51,45 @@ class User extends Component {
 
     render() { 
         return ( 
-            <>
-                <h1>Welcome to user</h1>
-                <PieChart data={insertChartData(this.state.chartData)}/> 
-                <label htmlFor='time window'>Time Window</label>
-                <select 
-                    name='time window' 
-                    value={this.state.timeWindow}
-                    onChange={(e) => this.handleChange()}
-                >
-                    <option value={31536000}>Year</option>
-                    <option value={15768000}>6 Months</option>
-                    <option value={7884000}>3 Months</option>
-                    <option value={2628000}>Month</option>
-                    <option value={604800}>Week</option>
-                </select>
-                <button onClick={this.handleGoBack}>Back</button>
-                <select 
-                        onChange={(e) => this.handleCategoryChange(e)}
-                        value={this.state.optionSelector}
+            <section className='userPage'>
+                <div className='chartDiv'>
+                    <article className='chart'>
+                        <PieChart data={insertChartData(this.state.chartData)}/> 
+                    </article>
+                    <label htmlFor='time window'>Time Window</label>
+                    <select className='chartSetting'
+                        name='time window' 
+                        value={this.state.timeWindow}
+                        onChange={(e) => this.handleChange(e, 'timeWindow')}
                     >
-                        <option value='--'>--</option>
-                        {this.state.childCategories.map( (cat) => (
-                            <option
-                                key={cat.id}
-                                value={cat.id}
-                            >{cat.description}</option>
-                        ))};
+                        <option value={31536000}>Year</option>
+                        <option value={15768000}>6 Months</option>
+                        <option value={7884000}>3 Months</option>
+                        <option value={2628000}>Month</option>
+                        <option value={604800}>Week</option>
                     </select>
-                <p>Add a new or recurring expense.</p>
-                {/* <p>Or, look at these expenses!</p>
-                <div>
-                    {this.state.allPurchases.map((item)=> (
-                        <div key={item.id}>
-                            <p>{item.description} {item.cost}</p>
-                        </div>
-                    ))}
-                </div> */}
-                <NavLink to='/addpurchaseitem'>Add New Expense</NavLink> 
-                <NavLink to='/addrecurringpurchaseitem'>Add Recurring Expense</NavLink>
-                <NavLink to='/modifyrecurringpurchaseitem'>Modify Recurring Expense</NavLink>
-                <NavLink to='/deletepurchases'>Delete a Purchase</NavLink>
-            </>
+                    <button className='chartSetting' onClick={this.handleGoBack}>Back</button>
+                    <select className='chartSetting'
+                            onChange={(e) => this.handleCategoryChange(e)}
+                            value={this.state.optionSelector} 
+                        >
+                            <option value='--'>--</option>
+                            {this.state.childCategories.map( (cat) => (
+                                <option
+                                    key={cat.id}
+                                    value={cat.id}
+                                >{cat.description}</option>
+                            ))};
+                    </select>
+                </div>
+                <div className='purchaseLinks'>
+                    <p>Add a new or recurring expense.</p>
+                    <NavLink to='/addpurchaseitem'>Add New Expense</NavLink> 
+                    <NavLink to='/addrecurringpurchaseitem'>Add Recurring Expense</NavLink>
+                    <NavLink to='/modifyrecurringpurchaseitem'>Modify Recurring Expense</NavLink>
+                    <NavLink to='/deletepurchases'>Delete a Purchase</NavLink>
+                </div>
+            </section>
          );
     }
 }
