@@ -57,7 +57,7 @@ class User extends Component {
                 <select 
                     name='time window' 
                     value={this.state.timeWindow}
-                    onChange={(e) => this.handleChange()}
+                    onChange={(e) => this.handleChange(e, 'timeWindow')}
                 >
                     <option value={31536000}>Year</option>
                     <option value={15768000}>6 Months</option>
