@@ -8,7 +8,6 @@ class Home extends Component {
     state = { 
         joke: ''
      }
-
     componentDidMount = async() => {
         const jokeObject = await getDadJoke()
         this.setState({joke: jokeObject.joke})
@@ -16,8 +15,7 @@ class Home extends Component {
     handleJoke = async() => {
         const jokeObject = await getDadJoke()
         this.setState({joke: jokeObject.joke})
-    }
-    
+    }    
     render() { 
         return ( 
             <section className="container">
@@ -26,26 +24,27 @@ class Home extends Component {
                     <div id="signin">
                         <Signin
                         setToken={this.props.setToken}
-                        history={this.props.history}
-                        /> 
+                        history={this.props.history}/> 
                         <article id="signupLink">
                             <p>New User:</p>
                             <NavLink to="/signup">Sign-up Here</NavLink> 
                         </article>
                     </div> :
-                    <div className="financeLinkDiv">
-                        <NavLink id="financeLink" to='/user'>Check Your Finances</NavLink>
-                    </div>
-                    }
-                </article>
-                <article className="dadJoke">
-                    <div>
-                        <p>Dad Joke of the Day:</p>
-                        <span>{this.state.joke}</span><br/>
-                        <div className="divButton">
-                        <button onClick={()=> {this.handleJoke()}}>New Dad Joke</button>
+                    <section className="ternarySection">
+                        <div className="financeLinkDiv">
+                            <NavLink id="financeLink" to='/user'>Check Your Finances</NavLink>
                         </div>
-                    </div>
+                        <article className="dadJoke">
+                            <div>
+                                <p>Dad Joke of the Day:</p>
+                                <span>{this.state.joke}</span><br/>
+                                <div className="divButton">
+                                    <button onClick={()=> {this.handleJoke()}}>New Dad Joke</button>
+                                </div>
+                            </div>
+                        </article>
+                    </section>
+                    }
                 </article>
             </section>
          );

@@ -2,7 +2,7 @@ export default function insertChartData(object) {
     const data = {
         labels: Object.keys(object),
         datasets: [{
-            label: 'Yo Money',
+            label: 'Your Money',
             data:  Object.values(object),
             backgroundColor: [
                 'rgba(88, 47, 14, 1)',
