@@ -46,3 +46,13 @@ summary {
 details summary {
   cursor: pointer;
 }
+.chartCategorySelector {
+  margin-top: 20px;
+}
+.chartCategorySelector button {
+  margin-left: 5px;
+}
+#timeWindow {
+  font-size: 15px;
+  margin: 20px 0px 10px 0px;
+}
