@@ -82,13 +82,17 @@ class User extends Component {
                             ))};
                     </select>
                 </div>
-                <div className='purchaseLinks'>
-                    <p>Add a new or recurring expense.</p>
-                    <NavLink to='/addpurchaseitem'>Add New Expense</NavLink> 
-                    <NavLink to='/addrecurringpurchaseitem'>Add Recurring Expense</NavLink>
-                    <NavLink to='/modifyrecurringpurchaseitem'>Modify Recurring Expense</NavLink>
-                    <NavLink to='/deletepurchases'>Delete a Purchase</NavLink>
-                </div>
+            <div className="dropdown">
+                <details>
+                    <summary>Add or Edit Purchases</summary>
+                        <div className='purchaseLinks'>
+                            <NavLink to='/addpurchaseitem'>Add New Purchase</NavLink> 
+                            <NavLink to='/addrecurringpurchaseitem'>Add Recurring Purchase</NavLink>
+                            <NavLink to='/modifyrecurringpurchaseitem'>Modify Recurring Purchase</NavLink>
+                            <NavLink to='/deletepurchases'>Delete a Purchase</NavLink>
+                        </div>
+                </details>
+            </div>
             </section>
          );
     }
