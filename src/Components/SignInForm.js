@@ -5,9 +5,8 @@ import './SignInForm.css';
 class Signin extends Component {
     state = { email: '', password: '' };
 
-    handleSubmit = async (event) => {
-        event.preventDefault();
-
+    handleSubmit = async (e) => {
+        e.preventDefault()
         const token = await getToken(
             {
                 email: this.state.email,
@@ -22,31 +21,29 @@ class Signin extends Component {
         return (
             <>
                 <h1 id="signinHeader">Sign-in</h1>
-            <section className="signinForm">
-                <form onSubmit={this.handleSubmit}>
-                    <div className='form-control'>
-                        <label>Email: </label>
-                        <input
-                            type='email'
-                            onChange={ (event) => {
-                                this.setState({ email: event.target.value })
-                            }}
-                        />
-                    </div>
-                    <div className='form-control'>
-                        <label>Password: </label>
-                        <input
-                            type='password'
-                            onChange={ (event) => {
-                                this.setState({ password: event.target.value })
-                            }}
-                        />
-                    </div>
-                    <div className="buttonDiv">
-                        <button>Sign-in</button>
-                    </div>
-                </form>
-            </section>
+                <section className="signinForm">
+                    <form onSubmit={this.handleSubmit}>
+                        <div className='form-control'>
+                            <label>Email: </label>
+                            <input
+                                type='email'
+                                onChange={ (e) => {
+                                    this.setState({ email: e.target.value })
+                                }}/>
+                        </div>
+                        <div className='form-control'>
+                            <label>Password: </label>
+                            <input
+                                type='password'
+                                onChange={ (e) => {
+                                    this.setState({ password: e.target.value })
+                                }}/>
+                        </div>
+                        <div className="buttonDiv">
+                            <button>Sign-in</button>
+                        </div>
+                    </form>
+                </section>
             </>
         );
     }

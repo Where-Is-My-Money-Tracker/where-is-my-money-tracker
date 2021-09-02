@@ -4,6 +4,7 @@ import { getPurchases, getCategories, getRecurring } from '../fetch-utils.js';
 import { findByParentId, mungeChartData, findById, normalizeCost } from '../helper-functions.js';
 import PieChart from './Chart.js';
 import insertChartData from '../chart-api.js';
+import './User.css';
 
 class User extends Component {
     state = { 
@@ -65,40 +66,51 @@ class User extends Component {
 
     render() { 
         return ( 
-            <>
-                <h1>Welcome to user</h1>
-                <PieChart data={insertChartData(this.state.chartData)}/> 
-                <label htmlFor='time window'>Time Window</label>
-                <select 
-                    name='time window' 
-                    value={this.state.timeWindow}
-                    onChange={(e) => this.handleChange(e, 'timeWindow')}
-                >
-                    <option value={31536000000}>Year</option>
-                    <option value={15768000000}>6 Months</option>
-                    <option value={7884000000}>3 Months</option>
-                    <option value={2628000000}>Month</option>
-                    <option value={604800000}>Week</option>
-                </select>
-                <button onClick={this.handleGoBack}>Back</button>
-                <select 
-                        onChange={(e) => this.handleCategoryChange(e)}
-                        value={this.state.optionSelector}
+            <section className='userPage'>
+                <div className='chartDiv'>
+                    <article className='chart'>
+                        <PieChart data={insertChartData(this.state.chartData)}/> 
+                    </article>
+                    <label htmlFor='time window'>Time Window</label>
+
+                    <select className='chartSetting'
+                        name='time window' 
+                        value={this.state.timeWindow}
+                        onChange={(e) => this.handleChange(e, 'timeWindow')}
                     >
-                        <option value='--'>--</option>
-                        {this.state.childCategories.map( (cat) => (
-                            <option
-                                key={cat.id}
-                                value={cat.id}
-                            >{cat.description}</option>
-                        ))};
+                        <option value={31536000000}>Year</option>
+                        <option value={15768000000}>6 Months</option>
+                        <option value={7884000000}>3 Months</option>
+                        <option value={2628000000}>Month</option>
+                        <option value={604800000}>Week</option>
                     </select>
-                <p>Add a new or recurring expense.</p>
-                <NavLink to='/addpurchaseitem'>Add New Expense</NavLink> 
-                <NavLink to='/addrecurringpurchaseitem'>Add Recurring Expense</NavLink>
-                <NavLink to='/modifyrecurringpurchaseitem'>Modify Recurring Expense</NavLink>
-                <NavLink to='/deletepurchases'>Delete a Purchase</NavLink>
-            </>
+
+                    <button className='chartSetting' onClick={this.handleGoBack}>Back</button>
+                    <select className='chartSetting'
+                            onChange={(e) => this.handleCategoryChange(e)}
+                            value={this.state.optionSelector} 
+                        >
+                            <option value='--'>--</option>
+                            {this.state.childCategories.map( (cat) => (
+                                <option
+                                    key={cat.id}
+                                    value={cat.id}
+                                >{cat.description}</option>
+                            ))};
+                    </select>
+                </div>
+            <div className="dropdown">
+                <details>
+                    <summary>Add or Edit Purchases</summary>
+                        <div className='purchaseLinks'>
+                            <NavLink to='/addpurchaseitem'>Add New Purchase</NavLink> 
+                            <NavLink to='/addrecurringpurchaseitem'>Add Recurring Purchase</NavLink>
+                            <NavLink to='/modifyrecurringpurchaseitem'>Modify Recurring Purchase</NavLink>
+                            <NavLink to='/deletepurchases'>Delete a Purchase</NavLink>
+                        </div>
+                </details>
+            </div>
+            </section>
          );
     }
 }

@@ -1,23 +1,39 @@
 a {
-    color: #582F0E;
+    color: black;
+    font-weight:800;
     text-decoration: none;
     font-size: 1.5rem;
 }
 a:hover {
-    color: #A68A64;
-    font-weight: bold;
+    color: aliceblue;
+    font-weight:900;
 }
 .container {
     display: flex;
-    flex-direction: row;
-    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
     height: 80vh;
+}
+.financeLinkDiv {
+    margin-top: 30px;
+    background-image: url('../money-stack.jpeg');
+    height: 200px;
+    width: 500px;
+    background-position:center;
+    filter: grayscale(75%);
+    box-shadow: 5px 5px 5px gray;
+    border: 2px solid #283618;
+    border-radius: 3px;
+}
+.financeLinkDiv:hover {
+    filter: none;
 }
 #financeLink {
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    margin-top: 30px;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
 }
 #signin {
     display: flex;
@@ -36,4 +52,41 @@ a:hover {
 }
 #signupLink a {
     margin-left: 10px;
+}
+#signupLink a:hover {
+    color: gray;
+    font-weight: bolder;
+}
+.dadJoke {
+    margin-top: 40px;
+    border: 2px solid #283618;
+    background-color: #DDA15E;
+    padding: 30px;
+    border-radius: 3px;
+    width: 50%;
+    font-family: 'Roboto';
+    box-shadow: 5px 5px 5px gray;
+}
+.dadJoke p {
+    text-align: center;
+    margin-bottom: 40px;
+    font-size: 25px;
+    font-weight: bolder;
+}
+.dadJoke span {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.divButton {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 20px;
+}
+.ternarySection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
