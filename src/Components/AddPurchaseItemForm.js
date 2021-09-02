@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getCategories, postCategories, postPurchase } from '../fetch-utils.js';
 import { findById } from '../helper-functions.js';
-import './AddPurchaseItemForm.css';
+import '../Styles/AddPurchaseItemForm.css';
 
 class AddPurchaseItem extends Component {
     state = { 

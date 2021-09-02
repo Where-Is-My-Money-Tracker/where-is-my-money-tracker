@@ -4,7 +4,7 @@ import { getPurchases, getCategories, getRecurring } from '../fetch-utils.js';
 import { findByParentId, mungeChartData, findById, normalizeCost } from '../helper-functions.js';
 import PieChart from './Chart.js';
 import insertChartData from '../chart-api.js';
-import './User.css';
+import '../Styles/User.css';
 
 class User extends Component {
     state = { 

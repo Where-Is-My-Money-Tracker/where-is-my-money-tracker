@@ -1,0 +1,13 @@
+img {
+    width: 100px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+.profile {
+    display: flex;
+    flex-direction: row;
+    margin: 50px;
+}
+h1 {
+    text-align: center;
+}

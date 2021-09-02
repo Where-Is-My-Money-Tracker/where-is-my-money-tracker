@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { getCategories, postCategories, postRecurring } from '../fetch-utils';
 import { findById } from '../helper-functions';
-import './AddPurchaseItemForm.css';
+import '../Styles/AddPurchaseItemForm.css';
 
 class AddRecurringPurchaseItem extends Component {
     state = {

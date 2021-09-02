@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { getToken } from '../fetch-utils.js';
-import './SignInForm.css';
+import '../Styles/SignInForm.css';
 
 class Signin extends Component {
     state = { email: '', password: '' };

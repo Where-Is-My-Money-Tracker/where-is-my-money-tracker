@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { deleteRecurring, getRecurring, putRecurring } from '../fetch-utils.js';
-import './ModifyRecurringPurchaseItems.css';
+import '../Styles/ModifyRecurringPurchaseItems.css';
 
 class ModifyRecurringPurchaseItem extends Component {
     state = { 

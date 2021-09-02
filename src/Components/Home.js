@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Signin from './SignInForm.js';
 import { NavLink } from 'react-router-dom';
-import './Home.css';
+import '../Styles/Home.css';
 import { getDadJoke } from '../fetch-utils.js';
 
 class Home extends Component {
@@ -32,7 +32,7 @@ class Home extends Component {
                     </div> :
                     <section className="ternarySection">
                         <div className="financeLinkDiv">
-                            <NavLink id="financeLink" to='/user'>Check Your Finances</NavLink>
+                            <NavLink id="financeLink" to='/user'>View Purchases</NavLink>
                         </div>
                         <article className="dadJoke">
                             <div>
