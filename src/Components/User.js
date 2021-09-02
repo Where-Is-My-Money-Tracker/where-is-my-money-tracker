@@ -18,7 +18,7 @@ class User extends Component {
     }
 
     handleChange = async (e,key) => {
-        this.setState({ [key]: e.target.value });
+        await this.setState({ [key]: e.target.value });
         this.renderChart(this.state.parentCategory, e.target.value);
     }
 
@@ -54,13 +54,13 @@ class User extends Component {
                     Number(item.stop_timestamp), 
                     Date.now(), 
                     timeWindow, 
-                    item.frequency, 
+                    Number(item.frequency), 
                     Number(item.cost.slice(1)));
             } else {
                 item.normalizedCost = item.cost;
             }
         })
-        const chartData = mungeChartData(childCategories, this.state.allCategories, this.state.allPurchases);
+        const chartData = mungeChartData(childCategories, this.state.allCategories, filteredPurchases);
         this.setState({ chartData });
     }
 

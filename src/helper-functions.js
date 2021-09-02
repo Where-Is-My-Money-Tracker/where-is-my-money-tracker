@@ -47,6 +47,7 @@ export function normalizeCost(start, stop, now, timeWindow, frequency, cost) {
 export function getSumRecursively(purchasesArr, categoryId) {
     let sum = 0;
     purchasesArr.forEach(purchase => {
+        console.log(purchase.normalizedCost);
         if (purchase.parent_id === categoryId) {
             sum += Number(purchase.normalizedCost.slice(1));
             const childArr = findByParentId(purchasesArr, purchase.category_id);
