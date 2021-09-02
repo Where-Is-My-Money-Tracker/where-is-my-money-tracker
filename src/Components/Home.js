@@ -2,15 +2,26 @@ import React, { Component } from 'react';
 import Signin from './SignInForm.js';
 import { NavLink } from 'react-router-dom';
 import './Home.css';
+import { getDadJoke } from '../fetch-utils.js';
 
 class Home extends Component {
-    state = {  }
+    state = { 
+        joke: ''
+     }
+
+    componentDidMount = async() => {
+        const jokeObject = await getDadJoke()
+        this.setState({joke: jokeObject.joke})
+    }
+    handleJoke = async() => {
+        const jokeObject = await getDadJoke()
+        this.setState({joke: jokeObject.joke})
+    }
     
     render() { 
         return ( 
             <section className="container">
                 <article>
-                    {/* put more things here? Heading? Welcome message? */}
                     {!this.props.token ? 
                     <div id="signin">
                         <Signin
@@ -22,8 +33,19 @@ class Home extends Component {
                             <NavLink to="/signup">Sign-up Here</NavLink> 
                         </article>
                     </div> :
-                        <NavLink id="financeLink" to='/user'>See Your Finances</NavLink>
+                    <div className="financeLinkDiv">
+                        <NavLink id="financeLink" to='/user'>Check Your Finances</NavLink>
+                    </div>
                     }
+                </article>
+                <article className="dadJoke">
+                    <div>
+                        <p>Dad Joke of the Day:</p>
+                        <span>{this.state.joke}</span><br/>
+                        <div className="divButton">
+                        <button onClick={()=> {this.handleJoke()}}>New Dad Joke</button>
+                        </div>
+                    </div>
                 </article>
             </section>
          );
