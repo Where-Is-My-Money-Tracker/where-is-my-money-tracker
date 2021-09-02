@@ -7,8 +7,9 @@ class Header extends Component {
     render() { 
         return ( 
             <div className="header">
-                <NavLink to="/user">Back to Profile</NavLink>
-                <NavLink to="/aboutus">About the Developers</NavLink>
+                <NavLink activeClassName='selected' exact to="/">Home</NavLink>
+                <NavLink activeClassName='selected' to="/user">View Purchases</NavLink>
+                <NavLink activeClassName='selected' to="/aboutus">About Us</NavLink>
                 <button onClick={() => {
                     localStorage.removeItem('TOKEN')
                     window.location.replace('/')

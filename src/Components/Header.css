@@ -44,3 +44,8 @@
         box-shadow: 0px 2px 2px gray;
     }
 }
+
+.selected {
+    pointer-events: none;
+    font-weight: bold;
+}
