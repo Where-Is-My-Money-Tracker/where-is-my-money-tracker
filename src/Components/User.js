@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import { NavLink } from 'react-router-dom';
-import { getPurchases, getCategories } from '../fetch-utils.js';
-import { findByParentId, mungeChartData, findById } from '../helper-functions.js';
+import { getPurchases, getCategories, getRecurring } from '../fetch-utils.js';
+import { findByParentId, mungeChartData, findById, normalizeCost } from '../helper-functions.js';
 import PieChart from './Chart.js';
 import insertChartData from '../chart-api.js';
 
@@ -10,42 +10,57 @@ class User extends Component {
         optionSelector: '--',
         parentCategory: 0,
         childCategories: [],
-        timeWindow: 31536000,
+        timeWindow: 31536000000,
         allPurchases: [],
         allCategories: [],
-        filteredPurchases: [],
         chartData: []
     }
 
     handleChange = async (e,key) => {
         this.setState({ [key]: e.target.value });
+        this.renderChart(this.state.parentCategory, e.target.value);
     }
 
     componentDidMount = async() => {
-        const allPurchases = await getPurchases();
+        const allPurchases = [...(await getPurchases()), ...(await getRecurring()) ];
         const allCategories = await getCategories();
-        this.setState({ allPurchases, allCategories})
-        const childCategories = findByParentId(allCategories, this.state.parentCategory);
-        this.setState({ childCategories });
-        const chartData = mungeChartData(childCategories, allCategories, allPurchases);
-        this.setState({ chartData });
+        await this.setState({ allPurchases, allCategories})
+        this.renderChart(this.state.parentCategory, this.state.timeWindow);
     }
 
-    handleCategoryChange = async (event) => {
-        this.setState({ parentCategory: event.target.value });
-        const childCategories = this.state.allCategories.filter(item => item.parent_id === Number(event.target.value));
-        this.setState({ childCategories });
-        const chartData = mungeChartData(childCategories, this.state.allCategories, this.state.allPurchases);
-        this.setState({ chartData: chartData });
+    handleCategoryChange = async (e) => {
+        this.renderChart(e.target.value, this.state.timeWindow);
     }   
 
     handleGoBack = async () => {
         const parentId = findById(this.state.allCategories, Number(this.state.parentCategory)).parent_id;
-        this.setState({ parentCategory: parentId });
-        const childCategories = this.state.allCategories.filter(item => item.parent_id === parentId);
-        this.setState({ childCategories });
+        this.renderChart(parentId, this.state.timeWindow);
+    }
+
+    renderChart = async (parentId, timeWindow) => {
+        parentId = Number(parentId);
+        timeWindow = Number(timeWindow);
+        const childCategories = findByParentId(this.state.allCategories, parentId);
+        await this.setState({ parentCategory: parentId, timeWindow, childCategories });
+        const filteredPurchases = this.state.allPurchases.filter(item => {
+            return item.timestamp ? (item.timestamp > (Date.now() - timeWindow)) 
+            : item.stop_timestamp > Date.now() - timeWindow || item.stop_timestamp === null 
+        });
+        filteredPurchases.forEach(item => {
+            if (item.start_timestamp) {
+                item.normalizedCost = normalizeCost(
+                    Number(item.start_timestamp), 
+                    Number(item.stop_timestamp), 
+                    Date.now(), 
+                    timeWindow, 
+                    item.frequency, 
+                    Number(item.cost.slice(1)));
+            } else {
+                item.normalizedCost = item.cost;
+            }
+        })
         const chartData = mungeChartData(childCategories, this.state.allCategories, this.state.allPurchases);
-        this.setState({ chartData: chartData });
+        this.setState({ chartData });
     }
 
     render() { 
@@ -57,13 +72,13 @@ class User extends Component {
                 <select 
                     name='time window' 
                     value={this.state.timeWindow}
-                    onChange={(e) => this.handleChange()}
+                    onChange={(e) => this.handleChange(e, 'timeWindow')}
                 >
-                    <option value={31536000}>Year</option>
-                    <option value={15768000}>6 Months</option>
-                    <option value={7884000}>3 Months</option>
-                    <option value={2628000}>Month</option>
-                    <option value={604800}>Week</option>
+                    <option value={31536000000}>Year</option>
+                    <option value={15768000000}>6 Months</option>
+                    <option value={7884000000}>3 Months</option>
+                    <option value={2628000000}>Month</option>
+                    <option value={604800000}>Week</option>
                 </select>
                 <button onClick={this.handleGoBack}>Back</button>
                 <select 
@@ -79,14 +94,6 @@ class User extends Component {
                         ))};
                     </select>
                 <p>Add a new or recurring expense.</p>
-                {/* <p>Or, look at these expenses!</p>
-                <div>
-                    {this.state.allPurchases.map((item)=> (
-                        <div key={item.id}>
-                            <p>{item.description} {item.cost}</p>
-                        </div>
-                    ))}
-                </div> */}
                 <NavLink to='/addpurchaseitem'>Add New Expense</NavLink> 
                 <NavLink to='/addrecurringpurchaseitem'>Add Recurring Expense</NavLink>
                 <NavLink to='/modifyrecurringpurchaseitem'>Modify Recurring Expense</NavLink>
