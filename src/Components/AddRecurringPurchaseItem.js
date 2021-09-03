@@ -38,7 +38,7 @@ handleSubmit = async (e) => {
         category_id: this.state.parentCategory,
         description: this.state.description,
         cost: this.state.cost,
-        frequency: this.state.frequency,
+        frequency: Number(this.state.frequency) * 86400000,
         start_timestamp: Date.now(),
         stop_timestamp: Date.now()
     }
