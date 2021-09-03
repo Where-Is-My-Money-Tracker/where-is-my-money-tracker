@@ -49,7 +49,6 @@ class User extends Component {
         });
         filteredPurchases.forEach(item => {
             if (item.start_timestamp) {
-                console.log(item.cost);
                 item.normalizedCost = normalizeCost(
                     Number(item.start_timestamp), 
                     Number(item.stop_timestamp), 
