@@ -22,7 +22,7 @@ class AddPurchaseItem extends Component {
         this.setState({childCategories})
      }
     handleChange = async (e, key) => {
-    this.setState({ [key]: e.target.value });
+        this.setState({ [key]: e.target.value });
     }
     handleCategoryChange = async (e) => {
         this.setState({optionSelector: e.target.value})
