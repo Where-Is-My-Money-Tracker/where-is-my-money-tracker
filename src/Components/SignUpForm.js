@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { getToken } from '../fetch-utils.js';
-import './SignInForm.css';
-import './SignUpForm.css';
+import '../Styles/SignInForm.css';
+import '../Styles/SignUpForm.css';
 
 class Signup extends Component {
     state = { email: '', password: '' };
-
-    handleSubmit = async (event) => {
-        event.preventDefault();
-
+    handleSubmit = async (e) => {
+        e.preventDefault();
         const token = await getToken(
             {
                 email: this.state.email,
@@ -18,7 +16,6 @@ class Signup extends Component {
         this.props.setToken(token);
         this.props.history.push('/user');
     };
-
     render() { 
         return (
             <>
@@ -29,19 +26,17 @@ class Signup extends Component {
                             <label>Email: </label>
                             <input
                                 type='email'
-                                onChange={ (event) => {
-                                    this.setState({ email: event.target.value })
-                                }}
-                            />
+                                onChange={ (e) => {
+                                    this.setState({ email: e.target.value })
+                                }}/>
                         </div>
                         <div className='form-control'>
                             <label>Password: </label>
                             <input
                                 type='password'
-                                onChange={ (event) => {
-                                    this.setState({ password: event.target.value })
-                                }}
-                            />
+                                onChange={ (e) => {
+                                    this.setState({ password: e.target.value })
+                                }}/>
                         </div>
                         <div className="buttonDiv">
                             <button>Sign-up</button>

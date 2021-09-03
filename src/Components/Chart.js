@@ -3,10 +3,7 @@ import React from 'react';
 
 const PieChart = (props) => (
     <>
-    <div>
-        <h1>Pie Chart!</h1>
-    </div>
-    <Pie data={props.data} />
+        <Pie data={props.data} />
     </>
 );
  

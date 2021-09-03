@@ -18,7 +18,6 @@
 .purchaseInput p, label {
     font-size: 1.5rem;
 }
-
 #dropDownLabel {
     display: flex;
     flex-direction: column;
