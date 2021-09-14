@@ -67,16 +67,13 @@ export function getSumRecursively(purchasesArr, categoryId) {
 }
 
 export function mungeChartData(categoriesArr, allCategories, purchasesArr) {
-    console.log(categoriesArr)
     const result = {};
     // You can avoid this munging step by joining the categories table on the backend
     const mungedPurchases = purchasesArr.map(purchase => {
         return { parent_id: getParentId(allCategories, purchase.category_id),...purchase }
     });
-    console.log(mungedPurchases)
     categoriesArr.forEach(category => {
         result[category.description] =  getSumRecursively(mungedPurchases, category.id);
     });
-    console.log(result)
     return result;
 }   
