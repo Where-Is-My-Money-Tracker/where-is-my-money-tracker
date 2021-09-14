@@ -8,6 +8,7 @@ export function findById(array, id) {
 
 export function findByParentId(arr, id) {
     const result = [];
+    // could use a filter instead of a forEach
     arr.forEach(item => {
         if (item.parent_id === id) {
             result.push(item);
@@ -18,6 +19,7 @@ export function findByParentId(arr, id) {
 
 export function getParentId(categoriesArr, childId) {
     let result;
+    // could use find instead of forEach
     categoriesArr.forEach(category => {
         if (category.id === childId) {
             result = category.parent_id;
@@ -41,6 +43,9 @@ export function normalizeCost(start, stop, now, timeWindow, frequency, cost) {
                 costResult = (cost / frequency) * (now - (now -timeWindow));
             }
         }
+        // I would suggest keeping your money as a number
+        // as long as possible and moving the formatting out 
+        // storing on the backend as an integer will help with this
         return `$${costResult}`;
     }
 
@@ -51,6 +56,7 @@ export function getSumRecursively(purchasesArr, categoryId) {
             sum += Number(purchase.normalizedCost.slice(1));
             const childArr = findByParentId(purchasesArr, purchase.category_id);
             if (childArr.length !== 0) {
+                console.log(childArr)
                 sum += getSumRecursively(childArr, purchase.id);
             }
         } else if (purchase.category_id === categoryId) {
@@ -61,12 +67,16 @@ export function getSumRecursively(purchasesArr, categoryId) {
 }
 
 export function mungeChartData(categoriesArr, allCategories, purchasesArr) {
+    console.log(categoriesArr)
     const result = {};
+    // You can avoid this munging step by joining the categories table on the backend
     const mungedPurchases = purchasesArr.map(purchase => {
         return { parent_id: getParentId(allCategories, purchase.category_id),...purchase }
     });
+    console.log(mungedPurchases)
     categoriesArr.forEach(category => {
         result[category.description] =  getSumRecursively(mungedPurchases, category.id);
     });
+    console.log(result)
     return result;
 }   
