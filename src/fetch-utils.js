@@ -1,138 +1,148 @@
-const URL = 'https://immense-plateau-42063.herokuapp.com';
+const URL = "https://immense-plateau-42063.herokuapp.com";
 
 export async function getToken(loginInfo, type) {
     const authURL = `${URL}/auth/${type}`;
     const resp = await fetch(authURL, {
-        method: 'POST',
+        method: "POST",
         headers: {
-            'Content-Type': 'application/json',
+            "Content-Type": "application/json",
         },
         body: JSON.stringify(loginInfo),
     });
     const data = await resp.json();
-    localStorage.setItem('TOKEN', data.token);
+    localStorage.setItem("TOKEN", data.token);
     return data.token;
 }
-export async function getPurchases(){
-    const data = `${URL}/api/purchases`
+
+export async function getPurchases() {
+    const data = `${URL}/api/purchases`;
     const response = await fetch(data, {
-        method: 'GET',
+        method: "GET",
         headers: {
-            'Content-type': 'application/json',
-            'Authorization': localStorage.getItem('TOKEN')
-        }
-    })
+            "Content-type": "application/json",
+            Authorization: localStorage.getItem("TOKEN"),
+        },
+    });
     const result = await response.json();
-    return result
+    return result;
 }
-export async function getRecurring(){
-    const data = `${URL}/api/recurring`
+
+export async function getRecurring() {
+    const data = `${URL}/api/recurring`;
     const response = await fetch(data, {
-        method: 'GET',
+        method: "GET",
         headers: {
-            'Content-type': 'application/json',
-            'Authorization': localStorage.getItem('TOKEN')
-        }
-    })
+            "Content-type": "application/json",
+            Authorization: localStorage.getItem("TOKEN"),
+        },
+    });
     const result = await response.json();
-    return result
+    return result;
 }
-export async function getCategories(){
-    const data = `${URL}/api/categories`
+
+export async function getCategories() {
+    const data = `${URL}/api/categories`;
     const response = await fetch(data, {
-        method: 'GET',
+        method: "GET",
         headers: {
-            'Content-type': 'application/json',
-            'Authorization': localStorage.getItem('TOKEN')
-        }
-    })
-    const result = await response.json();
-    return result
-}
-export async function postPurchase(purchaseObject){
-    const dataURL = `${URL}/api/purchases`
-    const response = await fetch(dataURL, {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-            'Authorization': localStorage.getItem('TOKEN')
-        },
-        body: JSON.stringify(purchaseObject)
-    });
-    const result = await response.json();
-    return result
-}
-export async function postRecurring(recurringObject){
-    const dataURL = `${URL}/api/recurring`
-    const response = await fetch(dataURL, {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-            'Authorization': localStorage.getItem('TOKEN')
-        },
-        body: JSON.stringify(recurringObject)
-    });
-    const result = await response.json();
-    return result
-}
-export async function postCategories(categoryObject){
-    const dataURL = `${URL}/api/categories`
-    const response = await fetch(dataURL, {
-        method: 'POST',
-        headers: {
-            'Content-type': 'application/json',
-            'Authorization': localStorage.getItem('TOKEN')
-        },
-        body: JSON.stringify(categoryObject)
-    });
-    const result = await response.json();
-    return result
-}
-export async function putRecurring(recurringObject){
-    const dataURL = `${URL}/api/recurring/${recurringObject.id}`
-    const response = await fetch(dataURL, {
-        method: 'PUT',
-        headers: {
-            'Content-type': 'application/json',
-            'Authorization': localStorage.getItem('TOKEN')
-        },
-        body: JSON.stringify(recurringObject)
-    });
-    const result = await response.json();
-    return result
-}
-export async function deletePurchase(purchaseObject){
-    const dataURL = `${URL}/api/purchases/${purchaseObject.id}`
-    const response = await fetch(dataURL, {
-        method: 'DELETE',
-        headers: {
-            'Content-type': 'application/json',
-            'Authorization': localStorage.getItem('TOKEN')
+            "Content-type": "application/json",
+            Authorization: localStorage.getItem("TOKEN"),
         },
     });
     const result = await response.json();
-    return result
+    return result;
 }
-export async function deleteRecurring(recurringObject){
-    const dataURL = `${URL}/api/recurring/${recurringObject.id}`
+
+export async function postPurchase(purchaseObject) {
+    const dataURL = `${URL}/api/purchases`;
     const response = await fetch(dataURL, {
-        method: 'DELETE',
+        method: "POST",
         headers: {
-            'Content-type': 'application/json',
-            'Authorization': localStorage.getItem('TOKEN')
+            "Content-type": "application/json",
+            Authorization: localStorage.getItem("TOKEN"),
+        },
+        body: JSON.stringify(purchaseObject),
+    });
+    const result = await response.json();
+    return result;
+}
+
+export async function postRecurring(recurringObject) {
+    const dataURL = `${URL}/api/recurring`;
+    const response = await fetch(dataURL, {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json",
+            Authorization: localStorage.getItem("TOKEN"),
+        },
+        body: JSON.stringify(recurringObject),
+    });
+    const result = await response.json();
+    return result;
+}
+
+export async function postCategories(categoryObject) {
+    const dataURL = `${URL}/api/categories`;
+    const response = await fetch(dataURL, {
+        method: "POST",
+        headers: {
+            "Content-type": "application/json",
+            Authorization: localStorage.getItem("TOKEN"),
+        },
+        body: JSON.stringify(categoryObject),
+    });
+    const result = await response.json();
+    return result;
+}
+
+export async function putRecurring(recurringObject) {
+    const dataURL = `${URL}/api/recurring/${recurringObject.id}`;
+    const response = await fetch(dataURL, {
+        method: "PUT",
+        headers: {
+            "Content-type": "application/json",
+            Authorization: localStorage.getItem("TOKEN"),
+        },
+        body: JSON.stringify(recurringObject),
+    });
+    const result = await response.json();
+    return result;
+}
+
+export async function deletePurchase(purchaseObject) {
+    const dataURL = `${URL}/api/purchases/${purchaseObject.id}`;
+    const response = await fetch(dataURL, {
+        method: "DELETE",
+        headers: {
+            "Content-type": "application/json",
+            Authorization: localStorage.getItem("TOKEN"),
         },
     });
     const result = await response.json();
-    return result
+    return result;
 }
-export async function getDadJoke(){
-    const dataURL = 'https://icanhazdadjoke.com/'
+
+export async function deleteRecurring(recurringObject) {
+    const dataURL = `${URL}/api/recurring/${recurringObject.id}`;
     const response = await fetch(dataURL, {
-        method: 'GET',
+        method: "DELETE",
         headers: {
-            'Accept': 'application/json'
-        }
-    })
-    const result = await response.json()
+            "Content-type": "application/json",
+            Authorization: localStorage.getItem("TOKEN"),
+        },
+    });
+    const result = await response.json();
+    return result;
+}
+
+export async function getDadJoke() {
+    const dataURL = "https://icanhazdadjoke.com/";
+    const response = await fetch(dataURL, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+        },
+    });
+    const result = await response.json();
     return result;
 }
