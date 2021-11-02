@@ -14,7 +14,7 @@ class Signup extends Component {
             }, 'signup'
         );
         this.props.setToken(token);
-        this.props.history.push('/user');
+        this.props.history.push('/');
     };
     render() { 
         return (

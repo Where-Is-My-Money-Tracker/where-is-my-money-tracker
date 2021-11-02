@@ -25,6 +25,7 @@ handleChange = async (e, key) => {
     this.setState({ [key]: e.target.value });
 }
 handleCategoryChange = async (e) => {
+    if (e.target.value === '--') return;
     this.setState({ optionSelector: e.target.value })
     if (e.target.value !== 'add new category') {
         this.setState({ parentCategory: e.target.value });
