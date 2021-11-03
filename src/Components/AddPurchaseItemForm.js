@@ -37,7 +37,7 @@ class AddPurchaseItem extends Component {
         e.preventDefault()
         const newPurchase = {
             description: this.state.description,
-            cost: this.state.cost,
+            cost: Number(this.state.cost) * 100,
             category_id: this.state.parentCategory,
             timestamp: Date.now() 
         }

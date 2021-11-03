@@ -59,12 +59,12 @@ export function getSumRecursively(purchasesArr, categoryId, allCategories) {
     purchasesArr
       .filter((purchase) => purchase.category_id === categoryId)
       .forEach((purchase) => {
-        sum += Number(purchase.normalizedCost.slice(1));
+        sum += Number(purchase.normalizedCost);
       });
   } else {
     purchasesArr.forEach((purchase) => {
       if (descendantCategories.includes(purchase.category_id)) {
-        sum += Number(purchase.normalizedCost.slice(1));
+        sum += Number(purchase.normalizedCost);
       }
     });
   }
@@ -74,11 +74,12 @@ export function getSumRecursively(purchasesArr, categoryId, allCategories) {
 export function mungeChartData(categoriesArr, allCategories, purchasesArr) {
   const result = {};
   categoriesArr.forEach((category) => {
-    result[category.description] = getSumRecursively(
+    const sumInIntegerCents = getSumRecursively(
       purchasesArr,
       category.id,
       allCategories
     );
+    result[category.description] = `$${Math.floor(sumInIntegerCents / 100)}`;
   });
   return result;
 }
