@@ -55,7 +55,7 @@ class User extends Component {
                     Date.now(), 
                     timeWindow, 
                     Number(item.frequency), 
-                    Number(item.cost.slice(1).replace(',', '')));
+                    Number(item.cost));
             } else {
                 item.normalizedCost = item.cost;
             }
