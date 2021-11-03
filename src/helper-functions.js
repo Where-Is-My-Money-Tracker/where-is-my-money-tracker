@@ -79,7 +79,7 @@ export function mungeChartData(categoriesArr, allCategories, purchasesArr) {
       category.id,
       allCategories
     );
-    result[category.description] = `$${Math.floor(sumInIntegerCents / 100)}`;
+    result[category.description] = Math.floor(sumInIntegerCents / 100);
   });
   return result;
 }
