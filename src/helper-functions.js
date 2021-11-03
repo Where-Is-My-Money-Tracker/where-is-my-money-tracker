@@ -31,7 +31,7 @@ export function normalizeCost(start, stop, now, timeWindow, frequency, cost) {
       costResult = (cost / frequency) * (now - (now - timeWindow));
     }
   }
-  return `$${costResult}`;
+  return costResult;
 }
 
 export function getSumRecursively(purchasesArr, categoryId, allCategories) {
